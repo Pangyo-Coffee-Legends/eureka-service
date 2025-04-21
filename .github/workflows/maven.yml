@@ -32,6 +32,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "target/*.jar"
           target: "~/eureka/target/"
+          strip_components: 1  
+          overwrite: true  
         
       - name: execute eureka startup script
         uses: appleboy/ssh-action@master
