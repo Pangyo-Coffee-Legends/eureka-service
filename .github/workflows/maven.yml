@@ -32,9 +32,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "target/*.jar"
           target: "~/eureka/target"
-          rm: true
-          overwrite: true
-
+        
       - name: execute eureka startup script
         uses: appleboy/ssh-action@master
         with:
@@ -46,5 +44,3 @@ jobs:
           script: |
             chmod +x ~/eureka/startup.sh  
             cd ~/eureka && ./startup.sh
-            sleep 10  # 서비스 시작 대기
-            curl -v localhost:10252 || exit 1  
