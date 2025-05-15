@@ -31,10 +31,20 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "target/*.jar"
-          target: "~/eureka/target/"
-          strip_components: 1  
-          overwrite: true  
-        
+          target: "~/eureka/"
+          rm: false
+
+      # 2. application.properties 파일 생성
+      - name: Create application.properties file
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_IP }}
+          username: ${{ secrets.SSH_ID }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo "${{ secrets.APPLICATION_PROPERTIES }}" > ~/eureka/application.properties
+
       - name: execute eureka startup script
         uses: appleboy/ssh-action@master
         with:
