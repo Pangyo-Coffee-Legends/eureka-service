@@ -53,4 +53,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script_stop: true
-          script: "cd ~/eureka && ./startup.sh"
+          script: |
+            chmod +x ~/eureka/startup.sh  
+            cd ~/eureka && ./startup.sh
